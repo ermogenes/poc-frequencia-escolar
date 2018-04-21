@@ -1,0 +1,20 @@
+﻿@model IEnumerable<EscolaColetorWeb.Entity.turma>
+
+@{
+    ViewBag.Title = "Escolher turma";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Escolher turma</h2>
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.dc_turma, "RealizarChamada", new { t = item.cd_turma }, "RealizarChamada")
+            </td>
+        </tr>
+    }
+</table>
+

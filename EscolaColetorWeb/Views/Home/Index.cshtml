@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Menu";
+}
+
+<div class="jumbotron">
+    <h1>@ViewBag.Title</h1>
+    <p class="lead">Esta tela serve somente para fins de apresentação. Não será disponibilizada aos usuários.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Para uso da escola, na Intranet</h2>
+        <ol>
+            <li><a href="~/Aluno">Manutenção de Alunos</a></li>
+            <li><a href="~/Turma">Manutenção de Turmas</a></li>
+            <li><a href="~/Responsavel">Manutenção de Responsáveis</a></li>
+            <li><a href="~/RealizarChamada">Realização de Chamada</a></li>
+        </ol>
+    </div>
+    <div class="col-md-6">
+        <h2>Para uso dos responsáveis, na Internet</h2>
+        <ol>
+            <li><a href="~/Chamada/EscolherResponsavel">Consulta de frequência</a></li>
+        </ol>
+    </div>
+</div>

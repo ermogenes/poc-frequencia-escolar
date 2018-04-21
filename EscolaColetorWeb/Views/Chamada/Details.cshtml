@@ -1,0 +1,43 @@
+﻿@model EscolaColetorWeb.Entity.chamada
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>chamada</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dt_chamada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dt_chamada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.in_presente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.in_presente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.aluno.nm_aluno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aluno.nm_aluno)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cd_chamada }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

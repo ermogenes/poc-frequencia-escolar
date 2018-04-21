@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="escolaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="aluno">
+          <Key>
+            <PropertyRef Name="cd_aluno" />
+          </Key>
+          <Property Name="cd_aluno" Type="int" Nullable="false" />
+          <Property Name="nm_aluno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cd_turma" Type="int" Nullable="false" />
+          <Property Name="cd_responsavel" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="chamada">
+          <Key>
+            <PropertyRef Name="dt_chamada" />
+            <PropertyRef Name="cd_aluno" />
+          </Key>
+          <Property Name="dt_chamada" Type="datetime" Nullable="false" />
+          <Property Name="cd_aluno" Type="int" Nullable="false" />
+          <Property Name="in_presente" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="responsavel">
+          <Key>
+            <PropertyRef Name="cd_responsavel" />
+          </Key>
+          <Property Name="cd_responsavel" Type="int" Nullable="false" />
+          <Property Name="nm_responsavel" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="turma">
+          <Key>
+            <PropertyRef Name="cd_turma" />
+          </Key>
+          <Property Name="cd_turma" Type="int" Nullable="false" />
+          <Property Name="dc_turma" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'escola.dbo.vw_chamada' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_chamada">
+          <Key>
+            <PropertyRef Name="dt_chamada" />
+            <PropertyRef Name="cd_aluno" />
+            <PropertyRef Name="nm_aluno" />
+            <PropertyRef Name="in_presente" />
+            <PropertyRef Name="cd_responsavel" />
+            <PropertyRef Name="nm_responsavel" />
+            <PropertyRef Name="cd_turma" />
+            <PropertyRef Name="dc_turma" />
+          </Key>
+          <Property Name="dt_chamada" Type="datetime" Nullable="false" />
+          <Property Name="cd_aluno" Type="int" Nullable="false" />
+          <Property Name="nm_aluno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="in_presente" Type="bit" Nullable="false" />
+          <Property Name="cd_responsavel" Type="int" Nullable="false" />
+          <Property Name="nm_responsavel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cd_turma" Type="int" Nullable="false" />
+          <Property Name="dc_turma" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__aluno__cd_respon__3F466844">
+          <End Role="responsavel" Type="Self.responsavel" Multiplicity="1" />
+          <End Role="aluno" Type="Self.aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="responsavel">
+              <PropertyRef Name="cd_responsavel" />
+            </Principal>
+            <Dependent Role="aluno">
+              <PropertyRef Name="cd_responsavel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aluno__cd_turma__3E52440B">
+          <End Role="turma" Type="Self.turma" Multiplicity="1" />
+          <End Role="aluno" Type="Self.aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="turma">
+              <PropertyRef Name="cd_turma" />
+            </Principal>
+            <Dependent Role="aluno">
+              <PropertyRef Name="cd_turma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__chamada__cd_alun__4316F928">
+          <End Role="aluno" Type="Self.aluno" Multiplicity="1" />
+          <End Role="chamada" Type="Self.chamada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aluno">
+              <PropertyRef Name="cd_aluno" />
+            </Principal>
+            <Dependent Role="chamada">
+              <PropertyRef Name="cd_aluno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="escolaModelStoreContainer">
+          <EntitySet Name="aluno" EntityType="Self.aluno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="chamada" EntityType="Self.chamada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="responsavel" EntityType="Self.responsavel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="turma" EntityType="Self.turma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_chamada" EntityType="Self.vw_chamada" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_chamada].[dt_chamada] AS [dt_chamada], 
+    [vw_chamada].[cd_aluno] AS [cd_aluno], 
+    [vw_chamada].[nm_aluno] AS [nm_aluno], 
+    [vw_chamada].[in_presente] AS [in_presente], 
+    [vw_chamada].[cd_responsavel] AS [cd_responsavel], 
+    [vw_chamada].[nm_responsavel] AS [nm_responsavel], 
+    [vw_chamada].[cd_turma] AS [cd_turma], 
+    [vw_chamada].[dc_turma] AS [dc_turma]
+    FROM [dbo].[vw_chamada] AS [vw_chamada]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__aluno__cd_respon__3F466844" Association="Self.FK__aluno__cd_respon__3F466844">
+            <End Role="responsavel" EntitySet="responsavel" />
+            <End Role="aluno" EntitySet="aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aluno__cd_turma__3E52440B" Association="Self.FK__aluno__cd_turma__3E52440B">
+            <End Role="turma" EntitySet="turma" />
+            <End Role="aluno" EntitySet="aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__chamada__cd_alun__4316F928" Association="Self.FK__chamada__cd_alun__4316F928">
+            <End Role="aluno" EntitySet="aluno" />
+            <End Role="chamada" EntitySet="chamada" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="escolaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="aluno">
+          <Key>
+            <PropertyRef Name="cd_aluno" />
+          </Key>
+          <Property Name="cd_aluno" Type="Int32" Nullable="false" />
+          <Property Name="nm_aluno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cd_turma" Type="Int32" Nullable="false" />
+          <Property Name="cd_responsavel" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="responsavel" Relationship="Self.FK__aluno__cd_respon__3F466844" FromRole="aluno" ToRole="responsavel" />
+          <NavigationProperty Name="turma" Relationship="Self.FK__aluno__cd_turma__3E52440B" FromRole="aluno" ToRole="turma" />
+          <NavigationProperty Name="chamada" Relationship="Self.FK__chamada__cd_alun__4316F928" FromRole="aluno" ToRole="chamada" />
+        </EntityType>
+        <EntityType Name="chamada">
+          <Key>
+            <PropertyRef Name="dt_chamada" />
+            <PropertyRef Name="cd_aluno" />
+          </Key>
+          <Property Name="dt_chamada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cd_aluno" Type="Int32" Nullable="false" />
+          <Property Name="in_presente" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="aluno" Relationship="Self.FK__chamada__cd_alun__4316F928" FromRole="chamada" ToRole="aluno" />
+        </EntityType>
+        <EntityType Name="responsavel">
+          <Key>
+            <PropertyRef Name="cd_responsavel" />
+          </Key>
+          <Property Name="cd_responsavel" Type="Int32" Nullable="false" />
+          <Property Name="nm_responsavel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="aluno" Relationship="Self.FK__aluno__cd_respon__3F466844" FromRole="responsavel" ToRole="aluno" />
+        </EntityType>
+        <EntityType Name="turma">
+          <Key>
+            <PropertyRef Name="cd_turma" />
+          </Key>
+          <Property Name="cd_turma" Type="Int32" Nullable="false" />
+          <Property Name="dc_turma" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="aluno" Relationship="Self.FK__aluno__cd_turma__3E52440B" FromRole="turma" ToRole="aluno" />
+        </EntityType>
+        <EntityType Name="vw_chamada">
+          <Key>
+            <PropertyRef Name="dt_chamada" />
+            <PropertyRef Name="cd_aluno" />
+            <PropertyRef Name="nm_aluno" />
+            <PropertyRef Name="in_presente" />
+            <PropertyRef Name="cd_responsavel" />
+            <PropertyRef Name="nm_responsavel" />
+            <PropertyRef Name="cd_turma" />
+            <PropertyRef Name="dc_turma" />
+          </Key>
+          <Property Name="dt_chamada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cd_aluno" Type="Int32" Nullable="false" />
+          <Property Name="nm_aluno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="in_presente" Type="Boolean" Nullable="false" />
+          <Property Name="cd_responsavel" Type="Int32" Nullable="false" />
+          <Property Name="nm_responsavel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cd_turma" Type="Int32" Nullable="false" />
+          <Property Name="dc_turma" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__aluno__cd_respon__3F466844">
+          <End Role="responsavel" Type="Self.responsavel" Multiplicity="1" />
+          <End Role="aluno" Type="Self.aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="responsavel">
+              <PropertyRef Name="cd_responsavel" />
+            </Principal>
+            <Dependent Role="aluno">
+              <PropertyRef Name="cd_responsavel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aluno__cd_turma__3E52440B">
+          <End Role="turma" Type="Self.turma" Multiplicity="1" />
+          <End Role="aluno" Type="Self.aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="turma">
+              <PropertyRef Name="cd_turma" />
+            </Principal>
+            <Dependent Role="aluno">
+              <PropertyRef Name="cd_turma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__chamada__cd_alun__4316F928">
+          <End Role="aluno" Type="Self.aluno" Multiplicity="1" />
+          <End Role="chamada" Type="Self.chamada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aluno">
+              <PropertyRef Name="cd_aluno" />
+            </Principal>
+            <Dependent Role="chamada">
+              <PropertyRef Name="cd_aluno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="escolaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="aluno" EntityType="Self.aluno" />
+          <EntitySet Name="chamada" EntityType="Self.chamada" />
+          <EntitySet Name="responsavel" EntityType="Self.responsavel" />
+          <EntitySet Name="turma" EntityType="Self.turma" />
+          <EntitySet Name="vw_chamada" EntityType="Self.vw_chamada" />
+          <AssociationSet Name="FK__aluno__cd_respon__3F466844" Association="Self.FK__aluno__cd_respon__3F466844">
+            <End Role="responsavel" EntitySet="responsavel" />
+            <End Role="aluno" EntitySet="aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aluno__cd_turma__3E52440B" Association="Self.FK__aluno__cd_turma__3E52440B">
+            <End Role="turma" EntitySet="turma" />
+            <End Role="aluno" EntitySet="aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__chamada__cd_alun__4316F928" Association="Self.FK__chamada__cd_alun__4316F928">
+            <End Role="aluno" EntitySet="aluno" />
+            <End Role="chamada" EntitySet="chamada" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="escolaModelStoreContainer" CdmEntityContainer="escolaEntities">
+          <EntitySetMapping Name="aluno">
+            <EntityTypeMapping TypeName="escolaModel.aluno">
+              <MappingFragment StoreEntitySet="aluno">
+                <ScalarProperty Name="cd_aluno" ColumnName="cd_aluno" />
+                <ScalarProperty Name="nm_aluno" ColumnName="nm_aluno" />
+                <ScalarProperty Name="cd_turma" ColumnName="cd_turma" />
+                <ScalarProperty Name="cd_responsavel" ColumnName="cd_responsavel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chamada">
+            <EntityTypeMapping TypeName="escolaModel.chamada">
+              <MappingFragment StoreEntitySet="chamada">
+                <ScalarProperty Name="dt_chamada" ColumnName="dt_chamada" />
+                <ScalarProperty Name="cd_aluno" ColumnName="cd_aluno" />
+                <ScalarProperty Name="in_presente" ColumnName="in_presente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="responsavel">
+            <EntityTypeMapping TypeName="escolaModel.responsavel">
+              <MappingFragment StoreEntitySet="responsavel">
+                <ScalarProperty Name="cd_responsavel" ColumnName="cd_responsavel" />
+                <ScalarProperty Name="nm_responsavel" ColumnName="nm_responsavel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="turma">
+            <EntityTypeMapping TypeName="escolaModel.turma">
+              <MappingFragment StoreEntitySet="turma">
+                <ScalarProperty Name="cd_turma" ColumnName="cd_turma" />
+                <ScalarProperty Name="dc_turma" ColumnName="dc_turma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_chamada">
+            <EntityTypeMapping TypeName="escolaModel.vw_chamada">
+              <MappingFragment StoreEntitySet="vw_chamada">
+                <ScalarProperty Name="dt_chamada" ColumnName="dt_chamada" />
+                <ScalarProperty Name="cd_aluno" ColumnName="cd_aluno" />
+                <ScalarProperty Name="nm_aluno" ColumnName="nm_aluno" />
+                <ScalarProperty Name="in_presente" ColumnName="in_presente" />
+                <ScalarProperty Name="cd_responsavel" ColumnName="cd_responsavel" />
+                <ScalarProperty Name="nm_responsavel" ColumnName="nm_responsavel" />
+                <ScalarProperty Name="cd_turma" ColumnName="cd_turma" />
+                <ScalarProperty Name="dc_turma" ColumnName="dc_turma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

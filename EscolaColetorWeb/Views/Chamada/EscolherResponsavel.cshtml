@@ -1,0 +1,14 @@
+﻿@model IEnumerable<EscolaColetorWeb.Entity.responsavel>
+
+<h2>Simular um responsável</h2>
+
+<table class="table">
+    @foreach (var r in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("ConsultarChamada", "Chamada", new { @responsavel = r.cd_responsavel, @data = DateTime.Today })">@r.nm_responsavel</a>
+            </td>
+        </tr>
+    }
+</table>

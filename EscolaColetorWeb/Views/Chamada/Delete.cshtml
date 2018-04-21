@@ -1,0 +1,49 @@
+﻿@model EscolaColetorWeb.Entity.chamada
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>chamada</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dt_chamada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dt_chamada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.in_presente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.in_presente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.aluno.nm_aluno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aluno.nm_aluno)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

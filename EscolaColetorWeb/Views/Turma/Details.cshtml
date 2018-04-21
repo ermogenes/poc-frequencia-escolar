@@ -1,0 +1,27 @@
+﻿@model EscolaColetorWeb.Entity.turma
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>turma</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dc_turma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dc_turma)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cd_turma }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

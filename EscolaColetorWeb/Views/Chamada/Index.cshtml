@@ -1,0 +1,46 @@
+﻿@model IEnumerable<EscolaColetorWeb.Entity.chamada>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dt_chamada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.in_presente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.aluno.nm_aluno)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dt_chamada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.in_presente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.aluno.nm_aluno)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.cd_chamada }) |
+            @Html.ActionLink("Details", "Details", new { id=item.cd_chamada }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.cd_chamada })
+        </td>
+    </tr>
+}
+
+</table>

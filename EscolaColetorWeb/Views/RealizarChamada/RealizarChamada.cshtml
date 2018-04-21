@@ -1,0 +1,32 @@
+﻿@model EscolaColetorWeb.Models.RealizarChamadaModel
+
+@{
+    ViewBag.Title = "Realizar chamada";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Realizar chamada de hoje</h2>
+
+<h3>@Model.turma.dc_turma, @Model.data.Date.ToShortDateString()</h3>
+
+<table class="table">
+    <tr>
+        <td>
+            <strong>Aluno</strong>
+        </td>
+        <td width="700">
+            <strong>Chamada</strong>
+        </td>
+    </tr>
+    @foreach (var item in Model.alunos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nm_aluno)
+            </td>
+            <td>
+                @Html.Partial("FormChamadaView", item)
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<EscolaColetorWeb.Entity.chamada>
+@{
+    ViewBag.Title = "Verificação de frequência de hoje";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var r = Model.FirstOrDefault();
+
+}
+
+<h2>Chamadas encontradas: 
+    @{
+        if (r != null)
+        {
+            @(r.aluno.responsavel.nm_responsavel)
+        }
+    }
+</h2>
+
+<table class="table">
+    <tr>
+        <td>
+            <strong>Aluno</strong>
+        </td>
+
+        <td>
+            <strong>Presente?</strong>
+</td>
+        <td>
+            <strong>Informado em</strong>
+</td>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.aluno.nm_aluno)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.in_presente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dt_chamada)
+            </td>
+
+        </tr>
+    }
+
+</table>
+

@@ -1,0 +1,43 @@
+﻿@model EscolaColetorWeb.Entity.aluno
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>aluno</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nm_aluno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nm_aluno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.responsavel.nm_responsavel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.responsavel.nm_responsavel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.turma.dc_turma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.turma.dc_turma)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cd_aluno }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

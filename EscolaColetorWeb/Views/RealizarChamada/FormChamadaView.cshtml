@@ -1,0 +1,22 @@
+﻿@model EscolaColetorWeb.Models.AlunoChamada
+
+@{ 
+    var valueList = new List<SelectListItem>();
+    valueList.Add(new SelectListItem() { Text = "--------", Value = "" });
+    valueList.Add(new SelectListItem() { Text = "Presente", Value = "true" });
+    valueList.Add(new SelectListItem() { Text = "Ausente", Value = "false" });
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.DropDownListFor(model => Model.in_presente, valueList)
+            @Html.HiddenFor(m => @Model.cd_chamada, new { @Value = @Model.cd_chamada })
+            @Html.HiddenFor(m => @Model.dt_chamada, new { @Value = @Model.dt_chamada })
+            @Html.HiddenFor(m => @Model.cd_aluno, new { @Value = @Model.cd_aluno })
+            @Html.HiddenFor(m => @Model.nm_aluno, new { @Value = @Model.nm_aluno })
+            <input type="submit" value="Salvar" />
+        </div>
+    </div>
+}
